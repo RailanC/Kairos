@@ -1,75 +1,48 @@
-<<<<<<< HEAD
+# =========================
+# Symfony / PHP
+# =========================
 
-###> symfony/framework-bundle ###
+# Environment variables
 /.env.local
 /.env.local.php
 /.env.*.local
+
+# Symfony secrets
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+
+# Cache, logs, and sessions
 /var/
+/var/cache/
+/var/log/
+/var/sessions/
+
+# Vendor dependencies
 /vendor/
-###< symfony/framework-bundle ###
 
-###> phpunit/phpunit ###
+/public/bundles/
+/build/
+/node_modules/
+
+# PHPUnit
 /phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
+/.phpunit.result.cache
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-=======
-# Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-
-# Email spool folder
-/app/spool/*
-
-# Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
-/var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
-
-# Logs (Symfony4)
-/var/log/*
-!var/log/.gitkeep
-
-# Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
-
-# Managed by Composer
-/app/bootstrap.php.cache
-/var/bootstrap.php.cache
+# Symfony console and bin (keep only necessary files)
 /bin/*
 !bin/console
 !bin/symfony_requirements
-/vendor/
 
-# Assets and user uploads
-/web/bundles/
-/web/uploads/
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
-# Build data
-/build/
+# IDE / OS files
+/.idea/
+/.vscode/
+/.DS_Store
+Thumbs.db
 
 # Composer PHAR
 /composer.phar
 
-# Backup entities generated with doctrine:generate:entities command
+# Backup files from Doctrine entities generation
 **/Entity/*~
 
 # Embedded web-server pid file
 /.web-server-pid
->>>>>>> 4df060498032f486ee4fc13c0ffc4c06a2bf79e4

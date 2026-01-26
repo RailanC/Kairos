@@ -1,2 +1,2 @@
 # Kairos
-Creation of a mobile-first website for a the kairos company.
+Creation of a mobile-first website for the kairos company.

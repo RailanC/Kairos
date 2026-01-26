@@ -1,0 +1,32 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.btn:hover span {
+    transform: scale(1.15);
+}
+
+.card img{
+    height: 250px;
+    width: 100%; 
+    object-fit: contain;
+}
+
+.shoppingbag{
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.shoppingbag:hover{
+    border-color: #218839;
+    color: #218839;
+}
