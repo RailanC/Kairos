@@ -1,0 +1,17 @@
+# Symfony PHP files
+*.php text eol=lf
+
+# Twig templates
+*.twig text eol=lf
+
+# YAML files
+*.yaml text eol=lf
+
+# JSON / lock files
+*.json text eol=lf
+
+# Scripts (bash)
+*.sh text eol=lf
+
+# Composer PHAR or binaries
+*.phar binary
