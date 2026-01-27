@@ -22,14 +22,14 @@
 <body>
 
     <div style="max-width: 80%; margin: 0 auto; padding: 0 15px;">
-        {% include 'partials/header.html.twig' %}
+        {% include 'partials/_header.html.twig' %}
 
         {% block body %} 
         
         {% endblock %}
-        {% include 'post/index.html.twig' %}
+        
         <div class="d-lg-none">
-            {% include 'partials/footer.html.twig' %}
+            {% include 'partials/_footer.html.twig' %}
         </div>
     </div>
 
