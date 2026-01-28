@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartyController extends AbstractController
 {
-    #[Route('/event', name: 'app_event')]
+    #[Route('/party', name: 'app_party')]
     public function index(): Response
     {
-        return $this->render('event/index.html.twig', [
+        return $this->render('party/index.html.twig', [
             'controller_name' => 'PartyController',
         ]);
     }
