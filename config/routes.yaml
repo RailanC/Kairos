@@ -1,5 +1,3 @@
-index:
-    path: /
-    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
-    defaults:
-        route: app_home
+controllers:
+    resource: ../src/Controller/
+    type: attribute
