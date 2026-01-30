@@ -80,4 +80,13 @@ class OrderItem
 
         return $this;
     }
+
+    public function getSubtotal(): ?string
+    {
+        if ($this->unit_price !== null && $this->quantity !== null) {
+            return bcmul($this->unit_price, (string)$this->quantity, 2);
+        }
+
+        return null;
+    }
 }

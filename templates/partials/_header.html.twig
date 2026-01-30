@@ -23,6 +23,15 @@
                     <input class="customform form-control form-control-sm w-50 rounded-pill" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
+            <div class="d-flex flex-column flex-lg-row align-items-center mt-3 mt-lg-0 order-3">
+                {% if app.user %}
+                    <a href="{{ path('app_profile') }}" class="btn me-2">Profile</a>
+                    <a href="{{ path('app_logout') }}" class="btn">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn me-2">Login</a>
+                    <a href="{{ path('app_register') }}" class="btn">Register</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 </header>

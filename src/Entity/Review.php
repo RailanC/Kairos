@@ -18,6 +18,10 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'reviews')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Product $product = null;
+
     #[ORM\Column]
     private ?int $rating = null;
 
@@ -43,6 +47,18 @@ class Review
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): static
+    {
+        $this->product = $product;
 
         return $this;
     }
@@ -91,6 +107,20 @@ class Review
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function approve(): static
+    {
+        $this->is_approved = true;
+
+        return $this;
+    }
+
+    public function reject(): static
+    {
+        $this->is_approved = false;
 
         return $this;
     }

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card shadow-sm" style="width: 100%; max-width: 500px; padding: 20px; border-radius: 10px;">
+            <div class="col-md-12 mx-auto">
+                <h1 class="text-center">Create Account</h1>
+                {{ form_start(registrationForm, { attr: { class: 'container mt-5' } }) }}
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.firstname) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.lastname) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.email) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.plainPassword.first) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_row(registrationForm.plainPassword.second) }}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        {{ form_row(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <div class="mt-4 text-center d-grid">
+                        <button type="submit" class="btn bg-primary-second">Sign-up</button>
+                    </div>
+                {{ form_end(registrationForm) }}
+
+                {{ form_errors(registrationForm) }}
+                <div>
+                    <p class="text-center mt-3">Already have an account? <a href="{{ path('app_login') }}">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

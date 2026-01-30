@@ -156,4 +156,50 @@ class Order
 
         return $this;
     }
+
+    public function getTotalPrice(): ?string
+    {
+        $total = '0.00';
+        foreach ($this->orderItems as $item) {
+            $subtotal = $item->getSubtotal();
+            if ($subtotal !== null) {
+                $total = bcadd($total, $subtotal, 2);
+            }
+        }
+        return $total;
+    }
+
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setOrder($this);
+        }
+
+        return $this;
+    }
+    
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getOrder() === $this) {
+                $orderItem->setOrder(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isPaid(): bool
+    {
+        return $this->payment_status === 'paid';
+    }
+
+    
 }

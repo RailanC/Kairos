@@ -17,7 +17,7 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
@@ -36,6 +36,9 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'product')]
     private Collection $orderItems;
 
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'product')]
+    private Collection $reviews;
+ 
     public function getId(): ?int
     {
         return $this->id;
@@ -112,4 +115,82 @@ class Product
 
         return $this;
     }
+
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+    
+
+    public function getFormattedPrice(): string
+    {
+        return number_format((float)$this->price, 2) .  '€';
+    }
+
+    public function __construct()
+    {
+        $this->orderItems = new ArrayCollection();
+
+        $this->created_at = new \DateTimeImmutable();
+        $this->is_active = true;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAverageRating(): ?float
+    {
+        $totalRating = 0;
+
+        foreach ($this->reviews as $review) {
+            if ($review->isApproved()) {
+                $totalRating += $review->getRating();
+                $approvedReviewsCount++;
+            }
+        }
+
+        if ($approvedReviewsCount === 0) {
+            return null;
+        }
+
+        return round($totalRating / $approvedReviewsCount, 2);
+    }
+
+    public function getReviewCount(): int
+    {
+        $count = 0;
+
+        foreach ($this->reviews as $review) {
+            if ($review->isApproved()) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
 }

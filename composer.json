@@ -23,8 +23,10 @@
         "symfony/form": "^6.4",
         "symfony/framework-bundle": "^6.4",
         "symfony/http-client": "^6.4",
+        "symfony/http-foundation": "^6.4",
         "symfony/intl": "^6.4",
         "symfony/mailer": "^6.4",
+        "symfony/mailgun-mailer": "^6.4",
         "symfony/mime": "^6.4",
         "symfony/monolog-bundle": "^3.0|^4.0",
         "symfony/notifier": "^6.4",
@@ -33,6 +35,8 @@
         "symfony/property-info": "^6.4",
         "symfony/runtime": "^6.4",
         "symfony/security-bundle": "^6.4",
+        "symfony/security-csrf": "^6.4",
+        "symfony/sendgrid-mailer": "^6.4",
         "symfony/serializer": "^6.4",
         "symfony/string": "^6.4",
         "symfony/translation": "^6.4",
@@ -40,6 +44,7 @@
         "symfony/validator": "^6.4",
         "symfony/web-link": "^6.4",
         "symfony/yaml": "^6.4",
+        "symfonycasts/verify-email-bundle": "^1.18",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -73,8 +78,7 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "cache:clear": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
