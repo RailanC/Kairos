@@ -1,0 +1,18 @@
+{# templates/partials/auth/_discovery.html.twig #}
+<h4 class="fw-bold mb-4">Welcome to Kairos</h4>
+<div class="w-100">
+    <form id="emailVerificationForm" data-url="{{ path('api_verify_email') }}">
+        <div class="auth-input-group mb-3">
+            <div class="form-floating border rounded-top">
+                <input type="email" value="{{ last_username }}" name="email" id="emailInput" class="form-control border-0" placeholder="Email" required autofocus>
+                <label for="emailInput">Email</label>
+            </div>
+        </div>
+        <p class="x-small text-muted mb-3">
+            We’ll send you a confirmation email to verify your account. Standard data rates apply. 
+            <a href="#" class="text-dark fw-bold">Privacy Policy</a>
+        </p>
+        <button class="btn btn-kairos-primary w-100 py-2 fw-bold mb-2" type="submit">Continue</button>
+    </form>
+</div>
+                        

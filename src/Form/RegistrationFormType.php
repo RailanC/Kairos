@@ -17,16 +17,15 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('firstname', Type\TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label_attr' => ['class' => 'form-label fw-bold'],
+                'attr' => ['class' => 'form-control border-0'],
             ])
             ->add('lastname', Type\TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label_attr' => ['class' => 'form-label fw-bold'],
+                'attr' => ['class' => 'form-control border-0'],
+
             ])
             ->add('email', Type\EmailType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label_attr' => ['class' => 'form-label fw-bold'],
+                'attr' => ['class' => 'form-control d-none user-email-input border-0', 'readonly' => true],
+                'label_attr' => ['class' => 'd-none']
             ])
             ->add('agreeTerms', Type\CheckboxType::class, [
                 'mapped' => false,
@@ -35,8 +34,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'attr' => ['class' => 'form-check-input'],
-                'label_attr' => ['class' => 'form-check-label'],
+                'attr' => ['class' => 'form-check-input border-0'],
             ])
             ->add('plainPassword', Type\RepeatedType::class, [
                 'type' => Type\PasswordType::class,
@@ -46,14 +44,12 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => [
                     'label' => 'Password',
                     'attr' => ['autocomplete' => 'new-password',
-                    'class' => 'form-control'],
-                    'label_attr' => ['class' => 'form-label fw-bold'],
+                    'class' => 'form-control border-0'],
                 ],
                 'second_options' => [
                     'label' => 'Confirm Password',
                     'attr' => ['autocomplete' => 'new-password',
-                    'class' => 'form-control'],
-                    'label_attr' => ['class' => 'form-label fw-bold'],
+                    'class' => 'form-control border-0'],
                     ],
                 'invalid_message' => 'The password fields must match.',
                 'constraints' => [

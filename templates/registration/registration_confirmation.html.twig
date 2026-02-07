@@ -1,0 +1,26 @@
+{# templates/emails/registration_confirmation.html.twig #}
+<!DOCTYPE html>
+<html>
+  <body style="font-family: Arial, sans-serif; color: #333;">
+    <h2>Welcome to Kairos, {{ user.firstname ?: user.email }}!</h2>
+
+    <p>Thanks for registering. Please confirm your email by clicking the link below:</p>
+
+    <p>
+      <a href="{{ signedUrl }}" style="background-color: #779523; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+        Confirm my email
+      </a>
+    </p>
+
+    <p style="color:#666;font-size:0.9rem;">
+      {# Use the translation key + data provided by the VerifyEmail helper #}
+      {% if expiresAtMessageKey is defined %}
+        {{ expiresAtMessageKey|trans(expiresAtMessageData|default({}, true), 'VerifyEmailBundle') }}
+      {% else %}
+        This link will expire soon.
+      {% endif %}
+    </p>
+
+    <p>If you did not create an account, please ignore this email.</p>
+  </body>
+</html>

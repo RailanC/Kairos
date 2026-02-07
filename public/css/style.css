@@ -73,3 +73,178 @@ h1, h2, h3, h4, h5, h6 {
     background-repeat: no-repeat; 
     padding-left: 35px;
 }
+
+/* Modal Login Register Styles */
+.kairos-modal {
+    border-radius: 24px !important;
+    border: none !important;
+    overflow: hidden;
+}
+
+.auth-input-group .form-floating:focus-within {
+    z-index: 2;
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 0 1px var(--secondary-color);
+}
+
+.auth-input-group .form-control:focus {
+    box-shadow: none;
+}
+
+
+.btn-kairos-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-kairos-primary:hover {
+    background-color: var(--secondary-second-color);
+    border-color: var(--secondary-second-color);
+    color: white;
+}
+
+.x-small {
+    font-size: 0.7rem;
+}
+
+.btn-custom {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+
+    flex: none; 
+    align-self: center;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1rem;
+    line-height: 1;
+    color: #222;
+    transition: all 0.2s ease;
+}
+
+.btn-custom:hover {
+    background-color: rgba(0, 0, 0, 0.09); 
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.02); 
+    color: #000000;
+}
+
+.btn-custom:active {
+    transform: scale(0.92);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#modalBackBtn span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.auth-input-stack .form-floating {
+    background-color: #fff;
+}
+
+.auth-input-stack .form-floating .form-control {
+    border-radius: 0;
+    border-color: #dee2e6;
+}
+
+.auth-input-stack .form-floating .form-control:focus {
+    z-index: 5;
+    box-shadow: inset 0 0 0 1px var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-kairos-primary {
+    background-color: var(--primary-second-color);
+    color: white;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-kairos-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(119, 149, 35, 0.2);
+}
+
+.btn-kairos-primary:active {
+    transform: scale(0.98);
+}
+
+.auth-link {
+    color: var(--secondary-second-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.success-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: #f0f4e6;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.success-icon-wrapper i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#registration-errors {
+    border-left: 4px solid var(--secondary-second-color);
+    background-color: #fff5f0;
+    color: var(--secondary-color);
+}
+
+#login-errors {
+    border-left: 4px solid var(--secondary-second-color);
+    background-color: #fff5f0;
+    color: var(--secondary-color);
+    font-weight: 500;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.shake-animation {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}

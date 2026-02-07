@@ -1,0 +1,23 @@
+{# templates/partials/auth/_login.html.twig #}
+<div id="login-errors" class="alert alert-danger d-none mb-3 small py-2">
+</div>
+<h4 class="fw-bold mb-4">Welcome back!</h4>
+<p class="text-muted mb-4">Enter password for <strong class="user-email-display"></strong></p>
+<div class="w-100">
+    <form method="post" action="{{ path('app_login') }}" id="ajax-login-form">
+        <div class="auth-input-group mb-3">
+            <input type="hidden" id="userEmailInput" name="email" class="user-email-input">
+            <div class="form-floating border rounded-top">
+                <input type="password" name="password" id="authPassword" class="form-control border-0" placeholder="Password" required>
+                <label for="authPassword">Password</label>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <p class="x-small text-muted mb-3">
+            We’ll never share your email with anyone else. 
+            <a href="#" class="text-dark fw-bold">Privacy Policy</a> 
+        </p>
+        <button class="btn btn-kairos-primary w-100 py-2 fw-bold mb-2" type="submit">Log in</button>
+    </form>
+</div>
+                        

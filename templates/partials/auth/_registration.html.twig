@@ -1,0 +1,68 @@
+{# templates/partials/auth/_registration.html.twig #}
+<div id="registration-container">
+    <h4 class="fw-bold mb-1">Finish signing up</h4>
+    <p class="text-muted mb-4 small">Create an account for <span class="user-email-display fw-bold text-dark"></span></p>
+
+    {{ form_start(registrationForm, { 
+        attr: { id: 'ajax-registration-form', class: 'needs-validation' }, 
+        action: path('app_register'), 
+        method: 'POST'
+    }) }}
+        
+        <div class="auth-input-stack mb-3">            
+            <div class="form-floating border rounded-top overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-6 form-floating border-start border-end border-bottom overflow-hidden">
+                        {{ form_widget(registrationForm.firstname, { attr: { class: 'form-control border-0', placeholder: 'First name' } }) }}
+                        <label>First name</label>
+                    </div>
+                    <div class="col-6 form-floating border-end border-bottom overflow-hidden">
+                        {{ form_widget(registrationForm.lastname, { attr: { class: 'form-control border-0', placeholder: 'Last name' } }) }}
+                        <label>Last name</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-floating border-start border-end border-bottom overflow-hidden">
+                {{ form_widget(registrationForm.plainPassword.first, { attr: { class: 'form-control border-0', placeholder: 'Password' } }) }}
+                <label>Password</label>
+            </div>
+            
+            <div class="form-floating border-start border-end border-bottom rounded-bottom overflow-hidden">
+                {{ form_widget(registrationForm.plainPassword.second, { attr: { class: 'form-control border-0', placeholder: 'Confirm Password' } }) }}
+                <label>Confirm Password</label>
+            </div>
+        </div>
+
+        <div id="registration-errors" class="alert alert-danger d-none small py-2 mb-3"></div>
+
+        <div class="form-check mb-4 small">
+            {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'form-check-input' } }) }}
+            <label class="form-check-label text-muted" for="{{ registrationForm.agreeTerms.vars.id }}">
+                I agree to the <a href="#" class="text-decoration-underline text-dark">Terms of Service</a> and <a href="#" class="text-decoration-underline text-dark">Privacy Policy</a>.
+            </label>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-kairos-primary btn-lg fw-bold py-3">
+                continue
+            </button>
+        </div>
+    {{ form_end(registrationForm) }}
+</div>
+
+<div id="registration-success" class="text-center d-none py-5">
+    <div class="mb-4">
+        <div class="success-icon-wrapper">
+            <i class="bi bi-envelope-check-fill text-success"></i>
+        </div>
+    </div>
+    <h4 class="fw-bold">Check your email</h4>
+    <p class="text-muted px-4">
+        We've sent a verification link to:<br>
+        <span class="user-email-display fw-bold text-dark"></span>
+    </p>
+    <div class="mt-4 d-grid px-4">
+        <button type="button" class="btn btn-outline-dark py-2" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>

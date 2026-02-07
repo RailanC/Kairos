@@ -28,8 +28,9 @@
                     <a href="{{ path('app_profile') }}" class="btn me-2">Profile</a>
                     <a href="{{ path('app_logout') }}" class="btn">Logout</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="btn me-2">Login</a>
-                    <a href="{{ path('app_register') }}" class="btn">Register</a>
+                    <button type="button" class="btn me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
                 {% endif %}
             </div>
         </div>

@@ -1,0 +1,33 @@
+{# templates/partials/_gatekeeper.html.twig #}
+{% set error = error|default(null) %}
+{% set last_username = last_username|default('') %}
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content kairos-modal">
+                    <div class="modal-header border-bottom py-3">
+                        <button type="button" id="modalBackBtn" class="btn-custom d-none" onclick="goBackToDiscovery()" aria-label="Back">
+                        <span style="position: relative; top: -1px;">&#8592;</span>
+                        </button>
+
+                        <button type="button" id="modalCloseBtn" class="btn-custom" data-bs-dismiss="modal" aria-label="Close">
+                            <span style="position: relative; top: -1px;">&times;</span>
+                        </button>
+                        <h6 class="modal-title w-100 text-center fw-bold mb-0" id="loginModalLabel">Log in or sign up</h6>
+                        <div style="width: 40px;"></div>
+                    </div>
+                    <div id="gatekeeper" class="modal-body p-4">
+                        <div id="auth-discovery" class="auth-section">
+                            {{ include('partials/auth/_discovery.html.twig') }}
+                        </div>
+
+                        <div id="auth-login" class="auth-section d-none">
+                            {{ render(controller('App\\Controller\\SecurityController::renderLoginForm')) }}
+                        </div>
+
+                        <div id="auth-register" class="auth-section d-none">
+                            {{ render(controller('App\\Controller\\RegistrationController::renderRegistrationForm')) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
