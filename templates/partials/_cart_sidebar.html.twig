@@ -1,0 +1,49 @@
+{# templates/partials/_cart_sidebar.html.twig #}
+<div class="cart-sidebar d-flex flex-column">
+    <!-- Header -->
+    <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light">
+        <h5 class="mb-0 fw-bold">My Cart</h5>
+    </div>
+
+    <!-- Items List (Scrollable) -->
+    <div class="flex-grow-1 overflow-auto p-3">
+        <ul class="list-unstyled mb-0 cart-items">
+            {% if cart is defined and cart|length > 0 %}
+                {% for item in cart %}
+                <li class="cart-item d-flex align-items-center mb-3 pb-3 border-bottom"
+                    data-price="{{ item.price|default(0) }}"
+                    data-id="{{ item.id }}"
+                >
+                    <img src="{{ asset('images/' ~ item.image) }}" alt="{{ item.name }}" width="60" height="60" class="me-3">
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0 fw-bold small">{{ item.name }}</h6>
+                            <span class="text-muted small">x <input type="number" class="cart-qty" min="1" value="{{ item.quantity }}" style="width:60px;"></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-1">
+                            <span class="item-price text-primary fw-bold small">{{ item.price|default('0.00') }} €</span>
+                            <button class="btn btn-sm text-danger remove-item" data-id="{{ item.id }}"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li class="text-center py-5">Your cart is empty.</li>
+            {% endif %}
+            
+        </ul>
+    </div>
+
+    <!-- Footer (Fixed at bottom) -->
+    {% if cart is defined and cart|length > 0 %}
+        <div class="p-3 border-top bg-light">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="fw-bold">Total</span>
+                <span id="cart-total" class="fw-bold text-primary"></span>
+            </div>
+            <a href="#" class="btn btn-primary w-100 py-2 fw-bold" style="background-color: var(--secondary-second-color); border: none;">
+                Checkout
+            </a>
+        </div>
+    {% endif %}
+</div>

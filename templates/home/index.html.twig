@@ -4,9 +4,9 @@
 
 {% block body %}
 <div class="container my-5">
-    <h1 class="text-center">Produits</h1>
+    <h1 class="text-center">Products</h1>
     <div class="row g-2">
-        {% for card in cards %}
+        {% for card in products %}
             {% include 'product/_card.html.twig' with {'card': card} %}
         {% endfor %}
     </div>

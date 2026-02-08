@@ -24,9 +24,15 @@
                 </form>
             </div>
             <div class="d-flex flex-column flex-lg-row align-items-center mt-3 mt-lg-0 order-3">
+            <div>
+                <button id="cart-toggle-btn" class="btn me-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="bi bi-bag" style="font-size: 1.5em;"></i>
+                </button>
+                {% include 'partials/_cart_sidebar.html.twig' %}
+            </div>
                 {% if app.user %}
-                    <button id="profile-toggle-btn" class="btn btn-link text-dark text-decoration-none">
-                        <img src="{{ asset(app.user.avatarPath) }}" alt="Profile" class="rounded-circle" width="40" height="40">
+                    <button id="profile-toggle-btn" class="rounded-circle btn btn-link text-dark text-decoration-none">
+                        <img src="{{ asset(app.user.avatarPath) }}" alt="Profile" class="rounded-circle" width="32" height="32">
                     </button>
                     {% include 'partials/_profile_sidebar.html.twig' %}
                 {% else %}
@@ -41,4 +47,5 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/sidebar.js') }}"></script>
+    <script src="{{ asset('js/calculateTotal.js') }}"></script>
 {% endblock %}

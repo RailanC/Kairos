@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\ProductRepository;
 
 class HomeController extends AbstractController
 {
@@ -15,22 +16,21 @@ class HomeController extends AbstractController
     }
 
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        $cards = [
-            ['image' => 'card1.png', 'star' => '1'],
-            ['image' => 'card2.png', 'star' => '2'],
-            ['image' => 'card3.png', 'star' => '3'],
-            ['image' => 'card1.png', 'star' => '4'],
-            ['image' => 'card2.png', 'star' => '5'],
-            ['image' => 'card3.png', 'star' => '4'],
-            ['image' => 'card2.png', 'star' => '2'],
-            ['image' => 'card3.png', 'star' => '3'],
-            
-        ];
-        return $this->render('home/index.html.twig', [
+        $products = $productRepository->findAll();
+        
+        // Sort products by average rating descending
+        usort($products, function($a, $b) {
+            return $b->getAverageRating() <=> $a->getAverageRating();
+        });
+
+        // Take only the first 8
+        $topProducts = array_slice($products, 0, 8);
+
+         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'cards' => $cards,
+            'products' => $topProducts,
         ]);
     }
 }

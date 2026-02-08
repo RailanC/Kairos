@@ -1,17 +1,31 @@
 <div class="col-md-3 mb-3">
     <div class="card position-relative">
-        <img src="{{ asset('images/' ~ card.image) }}" class="card-img-top" alt="Card image">
-        <button class="btn btn-sm position-absolute top-0 end-0 m-2 shoppingbag"><i class="bi bi-bag-plus"></i></button>
+        <img src="{{ asset('images/products/' ~ card.image) }}" class="top-rounded" alt="Card image">
+        
+        <button class="btn btn-sm position-absolute top-0 end-0 m-2 shoppingbag add-to-cart-btn"
+                data-id="{{ card.id|default(random()) }}" 
+                data-title ="{{ card.title|default('Unknown Product') }}" 
+                data-price ="{{ card.price }}"
+                data-image ="{{ card.image }}">
+            <i class="bi bi-bag-plus"></i>
+        </button>
+
         <div class="card-body">
             <p class="card-text text-center"> 
-                {% for i in 1..card.star %}
-                    <span style="color: #28a745;">★</span>
-                {% endfor %}
-                {% if card.star < 5 %}
-                    {% for i in (card.star + 1)..5 %}
-                            <span style="color: #ccc;">☆</span>
+                {% set avgRating = card.getAverageRating()|default(0)|round(0, 'floor') %}
+
+                {% if avgRating > 0 %}
+                    {% for i in 1..avgRating %}
+                        <span style="color: #28a745;">★</span>
                     {% endfor %}
                 {% endif %}
+                {% if avgRating < 5 %}
+                    {% for i in (avgRating + 1)..5 %}
+                        <span style="color: #ccc;">★</span>
+                    {% endfor %}
+                {% endif %}
+                
+                <small class="text-muted">({{ card.reviews|length }})</small>
             </p>
         </div>
     </div>

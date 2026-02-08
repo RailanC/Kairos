@@ -46,9 +46,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card img{
-    height: 250px;
-    width: 100%; 
-    object-fit: contain;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center; 
+    display: block;
 }
 
 .shoppingbag{
@@ -338,4 +340,37 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-overlay.active {
     display: block;
+}
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -350px; /* Hidden on the right */
+    width: 350px;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1060;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-item-img img {
+    border: 1px solid var(--kairos-border);
+}
+
+.cart-item:last-child {
+    border-bottom: none !important;
+}
+
+/* Custom scrollbar for the cart items */
+.cart-sidebar .overflow-auto::-webkit-scrollbar {
+    width: 5px;
+}
+.cart-sidebar .overflow-auto::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px;
 }
