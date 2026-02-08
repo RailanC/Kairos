@@ -28,7 +28,6 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--base-bg-color);
-    max-width: 80%; 
     margin: 0 auto; 
     padding: 0 15px;
 }
@@ -74,7 +73,6 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 35px;
 }
 
-/* Modal Login Register Styles */
 .kairos-modal {
     border-radius: 24px !important;
     border: none !important;
@@ -247,4 +245,97 @@ h1, h2, h3, h4, h5, h6 {
     20%, 80% { transform: translate3d(2px, 0, 0); }
     30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
     40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+:root {
+    --kairos-sidebar-bg: #ffffff;
+    --kairos-sidebar-hover: #f6f7f8;
+    --kairos-sidebar-active: #edeff1;
+    --kairos-text-main: #1c1c1c;
+    --kairos-text-muted: #7c7c7c;
+    --kairos-online-green: #46d160;
+    --kairos-border: #edeff1;
+}
+
+.profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; 
+    width: 300px;
+    height: 100vh;
+    background-color: var(--kairos-sidebar-bg) !important;
+    color: var(--kairos-text-main) !important;
+    z-index: 1050;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    border-left: 1px solid var(--kairos-border);
+}
+
+.profile-sidebar.active {
+    right: 0;
+}
+
+.profile-sidebar .nav-link {
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: background 0.2s ease;
+    font-size: 0.95rem;
+    color: var(--kairos-text-main) !important;
+    display: flex;
+    align-items: center;
+}
+
+.profile-sidebar .nav-link:hover {
+    background-color: var(--kairos-sidebar-hover);
+}
+
+.profile-sidebar .nav-link.active {
+    background-color: var(--kairos-sidebar-active) !important;
+}
+
+.profile-sidebar hr {
+    border-top: 1px solid var(--kairos-border);
+    opacity: 1;
+}
+
+.avatar-circle {
+    position: relative;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--kairos-online-green);
+    border: 2px solid var(--kairos-sidebar-bg);
+    border-radius: 50%;
+}
+
+.x-small {
+    font-size: 0.75rem;
+    color: var(--kairos-text-muted);
+}
+
+.nav-section-title {
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: var(--kairos-text-muted);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    display: none;
+    z-index: 1040;
+}
+
+.sidebar-overlay.active {
+    display: block;
 }
