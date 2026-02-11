@@ -345,7 +345,7 @@ h1, h2, h3, h4, h5, h6 {
 .cart-sidebar {
     position: fixed;
     top: 0;
-    right: -350px; /* Hidden on the right */
+    right: -350px;
     width: 350px;
     height: 100vh;
     background-color: #ffffff;
@@ -366,11 +366,20 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: none !important;
 }
 
-/* Custom scrollbar for the cart items */
 .cart-sidebar .overflow-auto::-webkit-scrollbar {
     width: 5px;
 }
 .cart-sidebar .overflow-auto::-webkit-scrollbar-thumb {
     background: #e0e0e0;
     border-radius: 10px;
+}
+
+.cart-items img{
+    border: 1px solid var(--kairos-border);
+    width: 60px;
+    height: 60px;
+}
+
+.cart{
+    width: 100%;
 }

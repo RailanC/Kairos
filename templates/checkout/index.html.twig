@@ -154,26 +154,30 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Order summary</h5>
-
-                    <ul id="checkout-cart-items" class="list-unstyled mb-3">
-                        {% if cart is defined and cart|length > 0 %}
-                            {% for item in cart %}
-                                <li class="d-flex justify-content-between align-items-center mb-2 cart-item"
-                                    data-price="{{ item.price|default(0) }}"
-                                    data-quantity="{{ item.quantity|default(1) }}">
-                                    <div>
-                                        <strong>{{ item.name }}</strong>
-                                        <div class="small text-muted">x{{ item.quantity }}</div>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="small text-muted">{{ (item.price * item.quantity)|number_format(2, '.', ',') }} €</div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li class="text-muted">Your cart is empty.</li>
-                        {% endif %}
-                    </ul>
+                    <div class="cart d-flex flex-column">
+                        <div class="flex-grow-1 overflow-auto p-3">
+                            <ul class="list-unstyled mb-0 cart-items" id="cart-list-container">
+                            </ul>
+                        </div>
+                    </div>
+                    <template id="cart-item-template">
+                        <li class="cart-item d-flex align-items-center mb-3 pb-3 border-bottom">
+                            <div class="badge bg-secondary me-3 cart-item-id d-none"></div>
+                            <img src="" alt="" width="60" height="60" class="me-3 cart-item-img">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-0 fw-bold small cart-item-name"></h6>
+                                    <span class="text-muted small">x 
+                                        <input type="number" class="cart-item-quantity" min="1" style="width:60px;">
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <span class="cart-item-price text-primary fw-bold small"></span>
+                                    <button class="btn btn-sm text-danger remove-item-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
 
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
@@ -181,7 +185,7 @@
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Shipping</span>
-                        <strong id="cart-shipping">0.00 €</strong>
+                        <strong id="cart-shipping">3.99 €</strong>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-0">
@@ -193,9 +197,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/checkout.js') }}"></script>
 {% endblock %}

@@ -3,10 +3,10 @@
         <img src="{{ asset('images/products/' ~ card.image) }}" class="top-rounded" alt="Card image">
         
         <button class="btn btn-sm position-absolute top-0 end-0 m-2 shoppingbag add-to-cart-btn"
-                data-id="{{ card.id|default(random()) }}" 
-                data-title ="{{ card.title|default('Unknown Product') }}" 
+                data-id="{{ card.id}}" 
+                data-title ="{{ card.title }}" 
                 data-price ="{{ card.price }}"
-                data-image ="{{ card.image }}">
+                data-image ="{{ asset('images/products/' ~ card.image) }}">
             <i class="bi bi-bag-plus"></i>
         </button>
 
