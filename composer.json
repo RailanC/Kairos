@@ -13,6 +13,7 @@
         "doctrine/doctrine-bundle": "2.12",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "2.19",
+        "stripe/stripe-php": "^19.3",
         "symfony/apache-pack": "*",
         "symfony/asset": "^6.4",
         "symfony/console": "^6.4",

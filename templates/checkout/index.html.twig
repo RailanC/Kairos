@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block body %}
+
 <div class="container py-5">
     <div class="row gx-4">
         <div class="col-lg-7">
             <h2 class="mb-4">Checkout</h2>
-
             
-            <form id="checkout-form" action="{{ path('app_checkout') }}" method="post" novalidate>
+            <form id="ajax-checkout-form" action="{{ path('app_checkout') }}" method="post" novalidate>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('checkout') }}" />
                 <input type="hidden" name="idempotency_key" id="idempotency_key" value="{{ idempotency_key|default('') }}">
 
@@ -107,7 +107,7 @@
                     </div>
                 </section>
 
-                <section class="mb-4">
+                <!--<section class="mb-4">
                     <h5>Shipping method</h5>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="shipping_method" id="ship_standard" value="standard" checked>
@@ -117,14 +117,14 @@
                         <input class="form-check-input" type="radio" name="shipping_method" id="ship_express" value="express">
                         <label class="form-check-label" for="ship_express">Express — 1–2 days (+ additional)</label>
                     </div>
-                </section>
+                </section>-->
 
                 <section class="mb-4">
-                    <h5>Payment</h5>
+                    <!--<h5>Payment</h5>
                     <div class="mb-3">
                         <div class="form-check form-check-inline">
                             <input id="pm_card" class="form-check-input" type="radio" name="payment_method" value="card" checked>
-                            <label class="form-check-label" for="pm_card">Card</label>
+                            <label class="form-check-label" for="pm_card">Credit/Debit Card</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input id="pm_paypal" class="form-check-input" type="radio" name="payment_method" value="paypal">
@@ -132,18 +132,40 @@
                         </div>
                     </div>
 
-                    {# Stripe Elements / other widget container. Use JS to mount the widget here. #}
-                    <div id="payment-widget">
-                        <div id="card-element" style="min-height: 44px; border: 1px solid #e6e6e6; padding: 10px; border-radius: 6px;">
-                            {# Stripe Elements will be mounted here via JS #}
+                     Card Payment Fields
+                    <div id="card-details" class="payment-method-details">
+                        <div class="mb-3">
+                            <label for="card-number" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
                         </div>
-                        <div id="card-errors" class="text-danger small mt-2" role="alert"></div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="card-expiry" class="form-label">Expiry Date</label>
+                                <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="card-cvc" class="form-label">CVC</label>
+                                <input type="text" class="form-control" id="card-cvc" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                     PayPal Option
+                    <div id="paypal-details" class="payment-method-details d-none">
+                        <p>You will be redirected to PayPal to complete your payment.</p>
+                    </div> -->
+
+                    {# Stripe Elements / other widget container. Use JS to mount the widget here. #}
+                    <div id="payment-widget" 
+                        data-public-key="{{ stripe_public_key }}"
+                        data-return-url="{{ url('payment_success') }}">
+                        <div id="link-authentication-element"></div>
+                        <div id="checkout-message" class="d-none text-danger small mt-2" role="alert"></div>
                     </div>
                 </section>
-
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <a href="{{ path('app_cart') }}" class="btn btn-link">Edit cart</a>
-                    <button id="checkout-submit" type="submit" class="btn btn-primary btn-lg">
+                    <button id="checkout-submit" type="button" class="btn btn-primary btn-lg">
                         Pay now
                     </button>
                 </div>
@@ -195,6 +217,14 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="module" src="{{ asset('js/stripe.js') }}"></script>
+    <script type="module" src="{{ asset('js/sidebar-cart-display.js') }}"></script>
+    <script type="module" src="{{ asset('js/cart-display.js') }}"></script>
 {% endblock %}

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartSubTotalElement = document.getElementById('cart-subtotal');
     const cartTotalElement = document.getElementById('cart-total');
     const cartTemplate = document.getElementById('cart-item-template');
-    let shipping = 3.99;
+    /*let shipping = 3.99;*/
     function renderCart() {
         if (!cartItemsContainer || !cartTemplate) return;
 
@@ -22,14 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
             radio.addEventListener('change', (e) => {
                 console.log(e.target.value);
                 updateShipping(e.target.value);
+                
             });
         });
 
-        function updateShipping(method){
-            const cost = method === 'express' ? 9.99 : 3.99;
+        /*function updateShipping(method){
+            let cost = method === 'express' ? 9.99 : 3.99;
             document.getElementById('cart-shipping').textContent = `${cost.toFixed(2)} €`
-            cartTotalElement.textContent = `${(cartManager.calculateTotal() + cost).toFixed(2)} €`;
-        };       
+            cartTotalElement.textContent = `${(cartManager.calculateTotal() + 3.99).toFixed(2)} €`;
+        };   */ 
+        
+        cartTotalElement.textContent = `${(cartManager.calculateTotal() + 3.99).toFixed(2)} €`;
 
 
         items.forEach(item => {
@@ -79,4 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     sameAddressCheckbox.addEventListener('change', toggleBillingAddress);
     toggleBillingAddress();
+
+    document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+        radio.addEventListener('change', function () {
+            document.getElementById('card-details').classList.toggle('d-none', this.value !== 'card');
+            document.getElementById('paypal-details').classList.toggle('d-none', this.value !== 'paypal');
+        });
+    });
+    
 });
