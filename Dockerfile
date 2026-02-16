@@ -32,7 +32,8 @@ COPY . .
 
 # Ensure vendor files are present (if you used composer cache above)
 # If you want vendor folder to be created at runtime instead, remove composer install above.
-RUN chown -R www-data:www-data /var/www/html/var /var/www/html/vendor || true
+RUN mkdir -p /var/www/html/var \
+ && chown -R www-data:www-data /var/www/html/var /var/www/html/vendor || true
 
 # Copy entrypoint and make it executable
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
