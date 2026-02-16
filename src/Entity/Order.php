@@ -169,6 +169,9 @@ class Order
         return $total;
     }
 
+    /**
+    * @return Collection<int, OrderItem>
+    */
     public function getOrderItems(): Collection
     {
         return $this->orderItems;
