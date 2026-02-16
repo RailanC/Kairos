@@ -19,8 +19,11 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-install pdo pdo_mysql intl mbstring zip opcache \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Enable rewrite for Symfony routes
-RUN a2enmod rewrite
+# FIX: Disable conflicting MPMs and ensure rewrite is enabled
+# This prevents the "More than one MPM loaded" error
+RUN a2dismod mpm_event mpm_worker || true \
+ && a2enmod mpm_prefork \
+ && a2enmod rewrite
 
 # Install Composer binary from official composer image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
