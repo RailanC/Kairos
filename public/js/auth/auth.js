@@ -1,7 +1,6 @@
-// public/js/auth.js
-import { initDiscoveryForm } from './auth/discovery.js';
-import { initLoginForm } from './auth/login.js';
-import { initRegistrationForm } from './auth/registration.js';
+import { initDiscoveryForm } from './discovery.js';
+import { initLoginForm } from './login.js';
+import { initRegistrationForm } from './registration.js';
 
 window.toggleModalButtons = function(showBack) {
     const backBtn = document.getElementById('modalBackBtn');

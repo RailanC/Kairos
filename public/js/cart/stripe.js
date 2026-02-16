@@ -1,5 +1,5 @@
-import { cartManager } from "./cart/cartManager.js";
-import { showToast } from './toast.js';
+import { cartManager } from "./cartManager.js";
+import { showToast } from '../toast.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     const widget = document.getElementById('payment-widget');
