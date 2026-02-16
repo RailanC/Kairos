@@ -56,6 +56,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
+        $this->created_at = new \DateTimeImmutable();
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        $this->email = $email;
+        $this->email = $emal;
 
         return $this;
     }
@@ -193,13 +202,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
-        $this->roles = ['ROLE_USER'];
-        $this->created_at = new \DateTimeImmutable();
-    }
+    
 
     public function removeOrder(Order $order): static
     {
@@ -285,6 +288,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?string $avatar): static
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+    * @return Collection<int, Cart>
+    */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): static
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts->add($cart);
+            $cart->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): static
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getCustomer() === $this) {
+                $cart->setCustomer(null);
+            }
+        }
 
         return $this;
     }

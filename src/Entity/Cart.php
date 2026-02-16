@@ -15,7 +15,7 @@ class Cart
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'order')]
+    #[ORM\ManyToOne(inversedBy: 'carts')]
     #[ORM\JoinColumn(nullable: false)]
     private User $customer;
 
@@ -43,7 +43,7 @@ class Cart
         return $this->id;
     }
 
-    public function getCustomer(): ?ser
+    public function getCustomer(): User
     {
         return $this->customer;
     }
