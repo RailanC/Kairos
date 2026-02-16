@@ -1,10 +1,12 @@
-# Use an official PHP image
-FROM php:8.1-fpm
+FROM php:8.1-apache
 
 # Provide a non-secret default for APP_ENV (can be overridden by Railway)
 ENV APP_ENV=prod
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
+
+# Apache document root (used by the sed replacement below)
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
 # Install system dependencies and PHP extensions commonly used by Symfony
 RUN apt-get update && apt-get install -y \
@@ -17,29 +19,36 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-install pdo pdo_mysql intl mbstring zip opcache \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Composer (copy from official composer image)
+# Enable rewrite for Symfony routes
+RUN a2enmod rewrite
+
+# Install Composer binary from official composer image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy only composer files and install dependencies (no scripts at build time)
+# Copy only composer files and install PHP dependencies (no scripts at build time)
 COPY composer.json composer.lock ./
-# We use --no-scripts to avoid running cache:clear etc. at build time (which may require env)
 RUN composer install --no-dev --no-scripts --prefer-dist --no-interaction --optimize-autoloader
 
 # Copy application code
 COPY . .
 
-# Ensure vendor files are present (if you used composer cache above)
-# If you want vendor folder to be created at runtime instead, remove composer install above.
-RUN mkdir -p /var/www/html/var \
- && chown -R www-data:www-data /var/www/html/var /var/www/html/vendor || true
+# Ensure Apache uses the Symfony public directory
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+ && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Ensure necessary directories exist and are writable by www-data
+RUN mkdir -p /var/www/html/var /var/www/html/public /var/www/html/vendor \
+ && chown -R www-data:www-data /var/www/html/var /var/www/html/vendor /var/www/html/public \
+ && chmod -R 755 /var/www/html
 
 # Copy entrypoint and make it executable
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 9000
+# Apache listens on 80
+EXPOSE 80
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
