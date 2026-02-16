@@ -44,6 +44,12 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    /**
+    * @var Collection<int, CartItem>
+    */
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: CartItem::class, orphanRemoval: true)]
+    private Collection $cartItems;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -51,6 +57,7 @@ class Product
 
         $this->created_at = new \DateTimeImmutable();
         $this->is_active = true;
+        $this->cartItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,5 +228,35 @@ class Product
     public function getFormattedPrice(): string
     {
         return number_format($this->getPriceAsFloat(), 2, '.', '') . ' €';
+    }
+
+    /**
+     * @return Collection<int, CartItem>
+     */
+    public function getCartItems(): Collection
+    {
+        return $this->cartItems;
+    }
+
+    public function addCartItem(CartItem $cartItem): static
+    {
+        if (!$this->cartItems->contains($cartItem)) {
+            $this->cartItems->add($cartItem);
+            $cartItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartItem(CartItem $cartItem): static
+    {
+        if ($this->cartItems->removeElement($cartItem)) {
+            // set the owning side to null (unless already changed)
+            if ($cartItem->getProduct() === $this) {
+                $cartItem->setProduct(null);
+            }
+        }
+
+        return $this;
     }
 }

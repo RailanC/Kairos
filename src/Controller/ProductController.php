@@ -17,4 +17,17 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
+
+    #[Route('/product/{id}/add-to-cart', name: 'app_add_to_cart')]
+    public function addToCart(int $id, CartService $cartService, ProductRepository $productRepo): Response
+    {
+        $product = $productRepo->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('Product not found');
+        }
+
+        $cartService->addItem($product, 1); // Add 1 of the product
+
+        return $this->redirectToRoute('app_cart_show'); // Or wherever you want to go
+    }
 }

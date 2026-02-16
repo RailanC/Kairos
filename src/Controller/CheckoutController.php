@@ -8,6 +8,7 @@ use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\CartService;
 
 class CheckoutController extends AbstractController
 {
@@ -34,8 +35,10 @@ class CheckoutController extends AbstractController
     }
 
     #[Route('/checkout/success', name: 'payment_success')]
-    public function success(): Response
+    public function success(CartService $cartService): Response
     {
+        $cartService->clearCart();
+
         return $this->render('checkout/success.html.twig');
     }
 

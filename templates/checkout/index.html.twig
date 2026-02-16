@@ -23,8 +23,8 @@
                     <h5>Contact</h5>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="full_name" class="form-label">Full name</label>
-                            <input type="text" class="form-control" id="full_name" name="customer[name]" required>
+                            <label for="full_name" class="form-label" >Full name</label>
+                            <input type="text" class="form-control" id="full-name" name="customer[name]" required>
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="form-label">Email</label>
@@ -225,6 +225,6 @@
 {% block javascripts %}
     <script src="https://js.stripe.com/v3/"></script>
     <script type="module" src="{{ asset('js/stripe.js') }}"></script>
-    <script type="module" src="{{ asset('js/sidebar-cart-display.js') }}"></script>
-    <script type="module" src="{{ asset('js/cart-display.js') }}"></script>
+    <script type="module" src="{{ asset('js/cart/sidebar-cart-display.js') }}"></script>
+    <script type="module" src="{{ asset('js/cart/cart-display.js') }}"></script>
 {% endblock %}
