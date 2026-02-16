@@ -47,3 +47,4 @@ Thumbs.db
 
 # Embedded web-server pid file
 /.web-server-pid.env
+templates/.eslintrc.json

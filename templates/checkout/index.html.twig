@@ -165,7 +165,7 @@
                 </section>
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <a href="{{ path('app_cart') }}" class="btn btn-link">Edit cart</a>
-                    <button id="checkout-submit" type="button" class="btn btn-primary btn-lg">
+                    <button disabled="true" id="checkout-submit" type="button" class="btn btn-primary btn-lg">
                         Pay now
                     </button>
                 </div>
@@ -227,4 +227,5 @@
     <script type="module" src="{{ asset('js/cart/stripe.js') }}"></script>
     <script type="module" src="{{ asset('js/cart/sidebar-cart-display.js') }}"></script>
     <script type="module" src="{{ asset('js/cart/cart-display.js') }}"></script>
+    <script src="{{ asset('js/formsCheckout.js') }}"></script>
 {% endblock %}

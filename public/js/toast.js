@@ -1,3 +1,5 @@
+
+import { sanitizeHtml } from './utils.js';
 export const showToast = (message, type = 'success') => {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -13,7 +15,7 @@ export const showToast = (message, type = 'success') => {
     
     toast.innerHTML = `
         <i class="bi ${icon}"></i>
-        <div>${message}</div>
+        <div>${sanitizeHtml(message)}</div>
     `;
 
     container.appendChild(toast);

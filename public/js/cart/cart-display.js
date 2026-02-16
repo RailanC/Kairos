@@ -1,5 +1,4 @@
 import { cartManager } from "./cartManager.js";
-
 document.addEventListener('DOMContentLoaded', () => {
     const cartItemsContainer = document.getElementById('cart-list-container');
     const cartSubTotalElement = document.getElementById('cart-subtotal');
