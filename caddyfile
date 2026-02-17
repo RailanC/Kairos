@@ -1,0 +1,19 @@
+{
+    # Global options
+    frankenphp
+    order php_server before file_server
+}
+
+:80 {
+    # Set the root to the Symfony public directory
+    root * public/
+
+    # Enable FrankenPHP's PHP server
+    php_server
+
+    # Compress responses
+    encode zstd gzip
+
+    # Handle static files
+    file_server
+}
