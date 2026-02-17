@@ -17,7 +17,7 @@ class Cart
 
     #[ORM\ManyToOne(inversedBy: 'carts')]
     #[ORM\JoinColumn(nullable: false)]
-    private User $customer;
+    private ?User $customer = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
@@ -43,12 +43,12 @@ class Cart
         return $this->id;
     }
 
-    public function getCustomer(): User
+    public function getCustomer(): ?User
     {
         return $this->customer;
     }
 
-    public function setCustomer(User $customer): static
+    public function setCustomer(?User $customer): static
     {
         $this->customer = $customer;
 

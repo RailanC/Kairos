@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'user')]
     private Collection $reviews;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $password = null;
 
     #[ORM\Column]
@@ -56,13 +56,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
+    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Cart::class)]
+    private Collection $carts;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
         $this->created_at = new \DateTimeImmutable();
-
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,7 +104,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        $this->email = $emal;
+        $this->email = $email;
 
         return $this;
     }
@@ -191,7 +194,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
