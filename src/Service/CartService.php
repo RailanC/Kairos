@@ -98,12 +98,16 @@ class CartService
 
     public function clearCart(): void
     {
-        $cart = $this->getCurrentCart();
-        
-        foreach ($cart->getCartItems() as $cartItem) {
-            $this->entityManager->remove($cartItem);
+        $user = $this->security->getUser();
+        $session = $this->requestStack->getSession();
+        if($user){
+            $cart = $this->getCurrentCart();
+            foreach ($cart->getCartItems() as $cartItem) {
+                $this->entityManager->remove($cartItem);
+            }
+            $this->entityManager->flush();
+        }else{
+            $session->remove('kairos_cart');
         }
-        
-        $this->entityManager->flush();
     }
 }

@@ -89,7 +89,6 @@ class CartManager {
                 throw error;
             }
         } else {
-            // For local storage
             this.items = [];
             this.saveLocal();
         }
@@ -170,7 +169,6 @@ class CartManager {
                 return this.updateQuantity(productId, newQuantity);
             }
         } else {
-            // For local storage
             const item = this.items.find(item => String(item.id) === String(productId));
             if (item) {
                 if (item.quantity <= 1) {

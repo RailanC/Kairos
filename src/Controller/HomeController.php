@@ -20,12 +20,10 @@ class HomeController extends AbstractController
     {
         $products = $productRepository->findAll();
         
-        // Sort products by average rating descending
         usort($products, function($a, $b) {
             return $b->getAverageRating() <=> $a->getAverageRating();
         });
 
-        // Take only the first 8
         $topProducts = array_slice($products, 0, 8);
 
          return $this->render('home/index.html.twig', [

@@ -1,5 +1,4 @@
 <?php
-// src/EventListener/LoginListener.php
 namespace App\EventListener;
 
 use App\Repository\CartRepository;
@@ -30,19 +29,14 @@ class LoginListener
             return;
         }
 
-        // Check if the user already has an active cart in the DB
         $existingCart = $this->cartRepository->findOneBy(['customer' => $user, 'status' => 'active']);
 
         if ($existingCart && $existingCart !== $sessionCart) {
-            // OPTIONAL: Logic to merge $sessionCart items into $existingCart
-            // For now, we just link the session cart to the user if they don't have one
-            // Or you can delete the old one. 
         } else {
             $sessionCart->setCustomer($user);
             $this->em->flush();
         }
 
-        // Clean up session
         $session->remove('cart_id');
     }
 }

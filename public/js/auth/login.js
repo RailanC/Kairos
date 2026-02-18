@@ -1,4 +1,3 @@
-// public/js/auth/login.js
 import { cartManager } from "../cart/cartManager.js";
 
 export function initLoginForm() {

@@ -1,10 +1,8 @@
-// public/js/auth/registration.js
 const form = document.getElementById('ajax-registration-form');
 export function initRegistrationForm() {
   const form = document.getElementById('ajax-registration-form');
   if (!form) return console.warn('Registration form not found');
 
-  // Ensure we don't attach twice
   if (form._registrationInit) return;
   form._registrationInit = true;
 

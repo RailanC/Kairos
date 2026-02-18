@@ -114,8 +114,7 @@ class RegistrationController extends AbstractController
         }
 
         $this->addFlash('success', 'Your email has been verified! You can now log in.');
-
-        // Redirect to your custom verification success page here:
+        
         return $this->redirectToRoute('app_verify_success');
     }
 

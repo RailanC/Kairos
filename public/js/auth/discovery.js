@@ -1,4 +1,3 @@
-// public/js/auth/discovery.js
 export async function checkEmail(email, checkUrl) {
     const response = await fetch(checkUrl, {
         method: 'POST',

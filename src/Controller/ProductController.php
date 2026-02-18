@@ -26,8 +26,8 @@ class ProductController extends AbstractController
             throw $this->createNotFoundException('Product not found');
         }
 
-        $cartService->addItem($product, 1); // Add 1 of the product
+        $cartService->addItem($product, 1);
 
-        return $this->redirectToRoute('app_cart_show'); // Or wherever you want to go
+        return $this->redirectToRoute('app_cart_show');
     }
 }

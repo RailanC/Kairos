@@ -21,7 +21,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // 1. Create Categories
         $categories = [];
         $catNames = ['Cakes', 'Cupcakes', 'Savory', 'Cookies'];
         foreach ($catNames as $name) {
@@ -32,7 +31,6 @@ class AppFixtures extends Fixture
             $categories[] = $category;
         }
 
-        // 2. Create an Admin and a Client
         $admin = new User();
         $admin->setEmail('admin@kairos.com');
         $admin->setFirstname('Admin');
@@ -50,7 +48,6 @@ class AppFixtures extends Fixture
         $client->setIsVerified(true);
         $manager->persist($client);
 
-        // 3. Create Products
         $productData = [
             ['Chocolate Dream', 'Rich dark chocolate cake', '45.00', 'card1.png', 0],
             ['Red Velvet', 'Classic red velvet with cream cheese', '40.00', 'card2.png', 0],
@@ -72,7 +69,6 @@ class AppFixtures extends Fixture
             
             $manager->persist($product);
 
-            // 4. Add a dummy review for each product
             $review = new Review();
             $review->setUser($client);
             $review->setProduct($product);

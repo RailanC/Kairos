@@ -31,4 +31,12 @@
         </div>
     </div>
 </div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('kairos_cart')) {
+                localStorage.removeItem('kairos_cart');
+                console.log('LocalStorage cart cleared.');
+            }
+        });
+</script>
 {% endblock %}

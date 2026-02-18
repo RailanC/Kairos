@@ -107,7 +107,6 @@ class CartController extends AbstractController
             }
 
             if ($quantity <= 0) {
-                // Remove item - find existing cart item and remove it
                 error_log("Removing item ID $productId");
                 foreach ($cart->getCartItems() as $cartItem) {
                     if ($cartItem->getProduct()->getId() === (int)$productId) {
@@ -116,8 +115,6 @@ class CartController extends AbstractController
                     }
                 }
             } else {
-                // Add or update item
-                // First check if item already exists in cart
                 $existingItem = null;
                 foreach ($cart->getCartItems() as $cartItem) {
                     if ($cartItem->getProduct()->getId() === (int)$productId) {
@@ -127,18 +124,16 @@ class CartController extends AbstractController
                 }
 
                 if ($existingItem) {
-                    // Update existing item quantity
                     error_log("Updating item ID $productId to quantity $quantity");
                     $existingItem->setQuantity($quantity);
                 } else {
-                    // Add new item
                     error_log("Adding new item ID $productId with quantity $quantity");
                     $cartService->addItem($product, $quantity);
                 }
             }
         }
 
-        $this->em->flush(); // Save all changes
+        $this->em->flush();
         error_log("=== Cart Sync Finished ===");
         return $this->json(['status' => 'ok']);
     }

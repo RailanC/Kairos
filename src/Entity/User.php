@@ -171,7 +171,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -210,7 +209,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeOrder(Order $order): static
     {
         if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
             if ($order->getUser() === $this) {
                 $order->setUser(null);
             }
@@ -237,7 +235,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeReview(Review $review): static
     {
         if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
             if ($review->getUser() === $this) {
                 $review->setUser(null);
             }
@@ -266,7 +263,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getAvatarPath(): string
     {
         if (!$this->avatar) {
-            // Return a default placeholder if no avatar is set
             return 'images/default-avatar.png';
         }
 
@@ -279,7 +275,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
@@ -316,7 +311,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCart(Cart $cart): static
     {
         if ($this->carts->removeElement($cart)) {
-            // set the owning side to null (unless already changed)
             if ($cart->getCustomer() === $this) {
                 $cart->setCustomer(null);
             }
