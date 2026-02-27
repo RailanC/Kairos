@@ -28,7 +28,7 @@ Kairos is an e-commerce platform developed for an artisanal company that sells h
 
 - Backend: PHP with Symfony
 - Frontend: Twig, JavaScript, Bootstrap, HTML5, CSS3
-- Database: (specify if known, e.g., MySQL, PostgreSQL)
+- Database: PostgreSQL
 - Others: LocalStorage for visitor carts, REST APIs for frontend-backend communication
 
 ## Installation
